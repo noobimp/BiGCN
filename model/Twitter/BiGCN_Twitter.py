@@ -111,6 +111,10 @@ def train_GCN(treeDic, x_test, x_train,TDdroprate,BUdroprate,lr, weight_decay,pa
     val_accs = []
     early_stopping = EarlyStopping(patience=patience, verbose=True)
     for epoch in range(n_epochs):
+        if per<1.:
+            lim = max(1, int(len(x_train_full)*per))
+            x_train = x_train_full[0:lim]
+            print("classifier train len: ", len(x_train))
         traindata_list, testdata_list = loadBiData(dataname, treeDic, x_train, x_test, TDdroprate,BUdroprate)
         train_loader = DataLoader(traindata_list, batch_size=batchsize, shuffle=True, num_workers=5)
         test_loader = DataLoader(testdata_list, batch_size=batchsize, shuffle=True, num_workers=5)
@@ -207,6 +211,8 @@ TDdroprate=0.2
 BUdroprate=0.2
 datasetname=sys.argv[1] #"Twitter15"、"Twitter16"
 iterations=int(sys.argv[2])
+per=float(sys.argv[3])
+print("****per****: ", per)
 model="GCN"
 device = th.device('cuda:0' if th.cuda.is_available() else 'cpu')
 test_accs = []
