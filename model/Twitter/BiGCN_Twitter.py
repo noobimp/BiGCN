@@ -109,6 +109,7 @@ def train_GCN(treeDic, x_test, x_train,TDdroprate,BUdroprate,lr, weight_decay,pa
     val_losses = []
     train_accs = []
     val_accs = []
+    x_train_full = x_train
     early_stopping = EarlyStopping(patience=patience, verbose=True)
     for epoch in range(n_epochs):
         if per<1.:
