@@ -205,8 +205,8 @@ def train_GCN(treeDic, x_test, x_train,TDdroprate,BUdroprate,lr, weight_decay,pa
 
 lr=0.0005
 weight_decay=1e-4
-patience=10
-n_epochs=200
+patience=5
+n_epochs=100
 batchsize=128
 TDdroprate=0.2
 BUdroprate=0.2
